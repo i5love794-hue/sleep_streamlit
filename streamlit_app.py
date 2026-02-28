@@ -9,25 +9,26 @@ st.set_page_config(
     layout="wide"
 )
 
-# 대시보드 경로 설정
-# GitHub 업로드 시 dashboard 폴더가 루트에 있는 것을 기준으로 합니다.
-dashboard_path = os.path.join(os.getcwd(), "dashboard", "index.html")
+# 대시보드 경로 설정 (GitHub 업로드 시의 경로)
+# streamlit_app.py와 dashboard 폴더가 같은 루트에 있다고 가정합니다.
+current_dir = os.path.dirname(os.path.abspath(__file__))
+dashboard_path = os.path.join(current_dir, "dashboard", "index.html")
 
+@st.cache_data
 def load_dashboard():
     if os.path.exists(dashboard_path):
         with open(dashboard_path, 'r', encoding='utf-8') as f:
-            html_content = f.read()
-            # 폰트와 라이브러리 경로가 로컬 상대 경로일 경우를 대비해 처리 (필요시)
-            return html_content
+            return f.read()
     else:
-        return "<h3>대시보드 파일을 찾을 수 없습니다. dashboard/index.html 경로를 확인해주세요.</h3>"
+        return f"<h3>⚠️ 대시보드 파일을 찾을 수 없습니다.</h3><p>현재 경로: {dashboard_path}</p>"
 
 # 메인 화면
 st.title("📊 수면 영양제 시장 분석 통합 대시보드")
 
-# HTML 대시보드 렌더링 (전체화면 높이 확보)
+# HTML 대시보드 렌더링
 html_string = load_dashboard()
-components.html(html_string, height=2500, scrolling=True)
+# scrolling=True와 함께 충분한 높이(2800)를 제공하여 모든 내용이 보이게 합니다.
+components.html(html_string, height=2800, scrolling=True)
 
 st.sidebar.markdown("""
 ### 🌙 Dashboard Info

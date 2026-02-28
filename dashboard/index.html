@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>월드 클래스 수면 영양제 대시보드</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- ApexCharts CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Local Data -->
+    <script src="data.js"></script>
+</head>
+
+<body class="light-mode">
+    <div class="glass-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i data-lucide="moon"></i>
+                <span>Sleep Insight</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="overview">
+                    <i data-lucide="layout-dashboard"></i> <span>개요</span>
+                </button>
+                <button class="nav-item" data-tab="trend">
+                    <i data-lucide="trending-up"></i> <span>트렌드</span>
+                </button>
+                <button class="nav-item" data-tab="blog">
+                    <i data-lucide="message-square"></i> <span>블로그</span>
+                </button>
+                <button class="nav-item" data-tab="shop">
+                    <i data-lucide="shopping-bag"></i> <span>쇼핑</span>
+                </button>
+                <button class="nav-item" data-tab="insights">
+                    <i data-lucide="lightbulb"></i> <span>인사이트</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="glass-button">
+                    <i data-lucide="sun" id="theme-icon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header class="header">
+                <h1>수면 영양제 시장 데이터 분석</h1>
+                <div class="filter-group">
+                    <select id="keyword-filter" class="glass-select">
+                        <option value="all">전체 성분 비교</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- Tabs Section -->
+            <section id="overview" class="tab-content active">
+
+                <div class="chart-grid">
+                    <div class="chart-card glass-card">
+                        <h3>성분별 관심도 비중 (검색 기반)</h3>
+                        <div id="blog-pie-chart"></div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>성분별 브랜드 다양성 비중 (쇼핑 기반)</h3>
+                        <div id="shop-pie-chart"></div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">👥 인구통계별 언급량 비중 상세</h2>
+                <div class="demo-chart-grid">
+                    <div class="chart-card glass-card">
+                        <h3>남성 선호 성분 비중</h3>
+                        <div id="male-pie-chart"></div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>여성 선호 성분 비중</h3>
+                        <div id="female-pie-chart"></div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>2030대 선호 성분 비중</h3>
+                        <div id="age2030-pie-chart"></div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>4050대 선호 성분 비중</h3>
+                        <div id="age4050-pie-chart"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trend" class="tab-content">
+                <div class="chart-card large glass-card">
+                    <div class="chart-header">
+                        <h3>검색 관심도 추이 (Ratio)</h3>
+                        <div class="toggle-group">
+                            <button class="toggle-btn active" data-segment="total">전체</button>
+                            <button class="toggle-btn" data-segment="male">남성</button>
+                            <button class="toggle-btn" data-segment="female">여성</button>
+                        </div>
+                    </div>
+                    <div id="trend-line-chart"></div>
+                </div>
+                <h2 class="section-title">📊 인구통계별 성분 선호도 (평균 Ratio)</h2>
+                <div class="demo-chart-grid">
+                    <div class="chart-card glass-card">
+                        <h3>남성 선호도 순위</h3>
+                        <div id="male-bar-chart"></div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>여성 선호도 순위</h3>
+                        <div id="female-bar-chart"></div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>2030대 선호도 순위</h3>
+                        <div id="age2030-bar-chart"></div>
+                    </div>
+                    <div class="chart-card glass-card">
+                        <h3>4050대 선호도 순위</h3>
+                        <div id="age4050-bar-chart"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="blog" class="tab-content">
+                <div id="blog-items-container" class="blog-grid">
+                    <!-- JS에서 품목별 블로그 카드들이 동적으로 생성됨 -->
+                </div>
+            </section>
+
+            <section id="shop" class="tab-content">
+                <div class="market-analysis-section">
+                    <h2 class="section-title">📊 쇼핑 시장 통합 분석</h2>
+                    <div class="analysis-grid">
+                        <div class="chart-card glass-card">
+                            <h3>항목별 평균 가격 비교</h3>
+                            <div id="shop-price-chart"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <h3>항목별 브랜드 등록 현황</h3>
+                            <div id="shop-brand-count-chart"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="shop-items-container" class="blog-grid">
+                    <!-- JS에서 품목별 쇼핑 카드들이 동적으로 생성됨 -->
+                </div>
+            </section>
+
+            <section id="insights" class="tab-content">
+                <div class="insight-grid">
+                    <div class="insight-card glass-card blue">
+                        <h3><i data-lucide="trending-up"></i> 시장 방향성 및 총평</h3>
+                        <div id="insight-market-direction" class="insight-content">데이터 분석 중...</div>
+                    </div>
+                    <div class="insight-card glass-card green">
+                        <h3><i data-lucide="shield-check"></i> 핵심 마케팅 전략</h3>
+                        <div id="insight-marketing-strategy" class="insight-content">데이터 분석 중...</div>
+                    </div>
+                </div>
+
+                <div class="item-insight-section">
+                    <h2 class="section-title">🧭 품목별 대응 방향성 (8종 상세)</h2>
+                    <div id="item-specific-insights" class="item-insight-grid">
+                        <!-- JS에서 8개 품목별 상세 카드가 생성됨 -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="dashboard.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

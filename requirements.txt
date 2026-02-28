@@ -1,0 +1,6 @@
+pandas
+plotly
+koreanize-matplotlib
+streamlit
+apexcharts-python
+# matplotlib (koreanize-matplotlib 의존성)

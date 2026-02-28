@@ -301,8 +301,21 @@ function renderBar(selector, seriesData, categories, title, color = '#3b82f6') {
     container.innerHTML = "";
     new ApexCharts(container, {
         series: [{ name: title, data: seriesData }],
-        chart: { type: 'bar', height: 400, toolbar: { show: false } },
+        chart: {
+            type: 'bar',
+            height: 400,
+            width: '100%', // 너비 100% 강제
+            toolbar: { show: false },
+            redrawOnParentResize: true, // 부모 크기 변경 대응
+            animations: { enabled: true }
+        },
         xaxis: { categories: categories },
+        grid: {
+            padding: {
+                left: 10,
+                right: 10
+            }
+        },
         plotOptions: {
             bar: {
                 borderRadius: 4,

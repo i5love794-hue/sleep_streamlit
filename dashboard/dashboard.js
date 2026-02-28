@@ -248,6 +248,7 @@ function renderShopCharts(filterKeyword) {
                     <thead>
                         <tr>
                             <th>순위</th>
+                            <th>이미지</th>
                             <th>중복</th>
                             <th>상품명</th>
                             <th>가격</th>
@@ -259,6 +260,11 @@ function renderShopCharts(filterKeyword) {
                         ${sortedShops.slice(0, 10).map((s, i) => `
                             <tr class="${s.is_duplicate ? 'duplicate-row' : ''}">
                                 <td><span class="rank-badge">${i + 1}</span></td>
+                                <td>
+                                    <div class="product-thumb-container">
+                                        <img src="${s.image}" alt="${s.title}" class="product-thumb" onerror="this.src='https://via.placeholder.com/40?text=No+Img'">
+                                    </div>
+                                </td>
                                 <td class="dup-status">${s.is_duplicate ? 'O' : 'X'}</td>
                                 <td class="title-cell"><a href="${s.link}" target="_blank">${s.title}</a></td>
                                 <td class="price-val">${(s.lprice || 0).toLocaleString()}원</td>
